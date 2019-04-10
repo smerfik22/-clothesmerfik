@@ -2,14 +2,17 @@
 
 Video - https://www.youtube.com/watch?v=ThE_fvBuUbA&feature=youtu.be
 
+
 F10 - menu
+
 
 installation:
 
-Add script into your resource folder
+- Add script into your resource folder
 
-Start clothesmerfik in server.cfg
+- Start clothesmerfik in server.cfg
+
 
 Requirements:
 
-basic esx stuff
+- Basic esx stuff
