@@ -7,6 +7,7 @@ F10 - menu
 installation:
 
 Add script into your resource folder
+
 Start clothesmerfik in server.cfg
 
 Requirements:
