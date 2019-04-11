@@ -10,25 +10,43 @@ end)
 RegisterNetEvent('smerfikubrania:koszulka')
 AddEventHandler('smerfikubrania:koszulka', function()
 	TriggerEvent('skinchanger:getSkin', function(skin)
-	
-
+		if(skin.sex == 0) then
 		local clothesSkin = {
 		['tshirt_1'] = 15, ['tshirt_2'] = 0,
 		['torso_1'] = 15, ['torso_2'] = 0,
 		['arms'] = 15, ['arms_2'] = 0
 		}
 		TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
+		else
+		local clothesSkin = {
+		['tshirt_1'] = 34, ['tshirt_2'] = 0,
+		['torso_1'] = 15, ['torso_2'] = 0,
+		['arms'] = 15, ['arms_2'] = 0
+		}
+		TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
+		end
+
+
 	end)
 end)
 RegisterNetEvent('smerfikubrania:spodnie')
 AddEventHandler('smerfikubrania:spodnie', function()
 	TriggerEvent('skinchanger:getSkin', function(skin)
-	
 
+		if(skin.sex == 0) then
 		local clothesSkin = {
 		['pants_1'] = 21, ['pants_2'] = 0
 		}
 		TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
+		else 
+		local clothesSkin = {
+		['pants_1'] = 15, ['pants_2'] = 0
+		}
+		TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
+		print('oops')
+		end
+		
+
 	end)
 end)
 
@@ -36,9 +54,27 @@ RegisterNetEvent('smerfikubrania:buty')
 AddEventHandler('smerfikubrania:buty', function()
 	TriggerEvent('skinchanger:getSkin', function(skin)
 	
-
+		if(skin.sex == 0) then
 		local clothesSkin = {
 		['shoes_1'] = 34, ['shoes_2'] = 0
+		}
+		TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
+		else
+		local clothesSkin = {
+		['shoes_1'] = 35, ['shoes_2'] = 0
+		}
+		TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
+		end
+	end)
+end)
+
+RegisterNetEvent('smerfikubrania:bag')
+AddEventHandler('smerfikubrania:bag', function()
+	TriggerEvent('skinchanger:getSkin', function(skin)
+	
+
+		local clothesSkin = {
+		['bags_1'] = 0, ['bags_2'] = 0
 		}
 		TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
 	end)
@@ -48,10 +84,11 @@ function OpenActionMenuInteraction(target)
 
 	local elements = {}
 
-	table.insert(elements, {label = ('put on clothes'), value = 'ubie'})
-	table.insert(elements, {label = ('remove shirt'), value = 'tul'})
-	table.insert(elements, {label = ('remove pants'), value = 'spo'})
-	table.insert(elements, {label = ('take off shoes'), value = 'but'})
+	table.insert(elements, {label = ('Put on clothes'), value = 'ubie'})
+	table.insert(elements, {label = ('Remove shirt'), value = 'tul'})
+	table.insert(elements, {label = ('Remove pants'), value = 'spo'})
+	table.insert(elements, {label = ('Take off shoes'), value = 'but'})
+	table.insert(elements, {label = ('Remove bag'), value = 'bag'})
   		ESX.UI.Menu.CloseAll()	
 
 
@@ -81,17 +118,16 @@ function OpenActionMenuInteraction(target)
 		elseif data.current.value == 'but' then
 		TriggerEvent('smerfikubrania:buty')
 		ESX.UI.Menu.CloseAll()	
+		elseif data.current.value == 'bag' then
+		TriggerEvent('smerfikubrania:bag')
+		ESX.UI.Menu.CloseAll()	
 	  end
 	end)
 
 
 end
 			
-Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(0)
-    if IsControlJustReleased(0, 57) and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'action_menu') then
+
+RegisterCommand('cmenu', function(source)
 		OpenActionMenuInteraction()
-    end
-  end
 end)
