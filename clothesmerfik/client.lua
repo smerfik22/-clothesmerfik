@@ -126,8 +126,12 @@ function OpenActionMenuInteraction(target)
 
 
 end
-			
 
-RegisterCommand('cmenu', function(source)
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(0)
+    if IsControlJustReleased(0, 57) and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'action_menu') then
 		OpenActionMenuInteraction()
+    end
+  end
 end)
